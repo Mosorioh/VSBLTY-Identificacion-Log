@@ -17,6 +17,31 @@ import datetime
 # DB
 import pymysql
 
+
+#crear carpeta
+try:
+    # change the destination path
+    print ("- Removiendo Carpetas logs")
+    PathLog = "C:/ProgramData/Vsblty/KingSalmon/"
+    rmtree(PathLog)
+    time.sleep(.200)
+    
+except FileNotFoundError:
+    print ("- Folder KingSalmon No Exists")
+
+#crear carpeta
+try:
+    # change the destination path
+    print ("- Removiendo Carpetas savephotos")
+    PathsavePhotos = "C:/ProgramData/VsbltyTmp/"
+    rmtree(PathsavePhotos)
+    
+except FileNotFoundError:
+    print ("- Folder VsbltyTmp No Exists")
+
+
+#input ()
+
 #///////////////////////////////////////////
 # GET-Endpoint-Test
 # Funcion para obtener de la DB, la ultima prueba que se ejecuto para el Endpoint
