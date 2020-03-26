@@ -7,6 +7,8 @@ from os import makedirs
 from os import remove
 import shutil
 
+# Hostname
+import socket 
 # comentario
 import json
 from io import open
@@ -93,13 +95,16 @@ def TestNumero():
 #--------- Setting -------------
 #
 #/////////////////////////////////////////////////////
-NumerodeCiclos = 8
-DuracionTest = 60
+NumerodeCiclos = 4
+DuracionTest = 600
 CountTest = 1
 DateTest = str(datetime.datetime.now())
 Fecha = DateTest[0:10]
 TestNumero = TestNumero()
 today = date.today()
+Hostname = socket.gethostname()
+
+
 
 #crear carpeta
 try:
@@ -124,6 +129,7 @@ print ("///////////////////////////////////////////////////////////////////")
 print (" - Inicio de Test y Ciclos")
 print ("  --- Setting Test")
 print ("       - Date: ", Fecha)
+print ("       - Hostname: ", Hostname)
 print ("       - Test Numero: ", TestNumero)
 print ("       - Ciclos Definidos: ", NumerodeCiclos)
 print ("       - Duracion por Ciclo: ", DuracionTest, "Segundos")
@@ -268,6 +274,7 @@ while CountTest <= NumerodeCiclos:
                 print ("Test Numero:       ", TestNumero)
                 print ("Ciclo Test:        ", CountTest)
                 print ("Item:              ", i)
+                print ("Hostname:              ", Hostname)
                 print ("File:              ", archivo)
                 print ("Time:              ", Timeline)
                 print ("Name:              ", NamePerson)
@@ -289,8 +296,8 @@ while CountTest <= NumerodeCiclos:
                     with connection.cursor() as cursor:
                 # Create a new record
                                         
-                        sql = "INSERT INTO `Identificacion` (`Item`, `File`, `Timeline`, `Name`, `PersonId`, `MatchProbability`, `GroupId`, `LocalPersistedId`, `TestNumero`, `FechaTest`, `CicloTest`, `StartCiclo`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-                        cursor.execute(sql, (i, archivo, Timeline, NamePerson, PersonId, MatchProbability, GroupId, LocalPersistedFaceId, TestNumero, today, CountTest, StartTestCliente))
+                        sql = "INSERT INTO `Identificacion` (`Item`, `File`, `Timeline`, `Name`, `PersonId`, `MatchProbability`, `GroupId`, `LocalPersistedId`, `TestNumero`, `FechaTest`, `CicloTest`, `StartCiclo`, `Hostname`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+                        cursor.execute(sql, (i, archivo, Timeline, NamePerson, PersonId, MatchProbability, GroupId, LocalPersistedFaceId, TestNumero, today, CountTest, StartTestCliente, Hostname))
                          
 
 
