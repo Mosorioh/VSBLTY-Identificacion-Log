@@ -7,6 +7,7 @@ from os import makedirs
 from os import remove
 import shutil
 
+# comentario
 import json
 from io import open
 
@@ -80,7 +81,7 @@ def TestNumero():
 #--------- Setting -------------
 #
 #/////////////////////////////////////////////////////
-NumerodeCiclos = 4
+NumerodeCiclos = 8
 DuracionTest = 60
 CountTest = 1
 DateTest = str(datetime.datetime.now())
@@ -102,7 +103,7 @@ today = date.today()
 #crear carpeta
 try:
     # change the destination path
-    FolderTest = "C:/Users/Mijail/Documents/VSBLTY-Identificacion-Log/Log-Result/"  + Fecha + " Test-" + str(TestNumero)
+    FolderTest = "C:/ProgramData/Vsblty-Test/Identification-Results/"  + Fecha + " TEST - " + str(TestNumero)
     makedirs(FolderTest)
     print ("Creating Folder of Test-", TestNumero)
 except FileExistsError:
@@ -128,7 +129,7 @@ while CountTest <= NumerodeCiclos:
 
     print ("Test Numero", CountTest)
 
-    print ("Start Cliente", StartTestCliente) 
+    #print ("Start Cliente", StartTestCliente) 
     print ("Fecha", Fecha)
 
     #input ()
@@ -144,7 +145,7 @@ while CountTest <= NumerodeCiclos:
     os.system('taskkill -f -im vsb*')
     StopTestCliente =  datetime.datetime.now()
     print ("Stop Client", StopTestCliente)
-    CountTest +=1 
+    
     time.sleep(1)
 
     #//////////////////////////////////
@@ -234,6 +235,7 @@ while CountTest <= NumerodeCiclos:
                 i +=1
                 print ("Date Test:         ", today)
                 print ("Test Numero:       ", TestNumero)
+                print ("Ciclo Test:        ", CountTest)
                 print ("Item:              ", i)
                 print ("File:              ", archivo)
                 print ("Time:              ", Timeline)
@@ -256,8 +258,8 @@ while CountTest <= NumerodeCiclos:
                     with connection.cursor() as cursor:
                 # Create a new record
                                         
-                        sql = "INSERT INTO `Identificacion` (`Item`, `File`, `Timeline`, `Name`, `PersonId`, `MatchProbability`, `GroupId`, `LocalPersistedId`, `TestNumero`, `FechaTest`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-                        cursor.execute(sql, (i, archivo, Timeline, NamePerson, PersonId, MatchProbability, GroupId, LocalPersistedFaceId, TestNumero, today))
+                        sql = "INSERT INTO `Identificacion` (`Item`, `File`, `Timeline`, `Name`, `PersonId`, `MatchProbability`, `GroupId`, `LocalPersistedId`, `TestNumero`, `FechaTest`, `CicloTest`, `StartCiclo`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+                        cursor.execute(sql, (i, archivo, Timeline, NamePerson, PersonId, MatchProbability, GroupId, LocalPersistedFaceId, TestNumero, today, CountTest, StartTestCliente))
                          
 
 
@@ -270,7 +272,7 @@ while CountTest <= NumerodeCiclos:
         # Close opend file
         archivo_texto.close()
 
-
+    CountTest +=1 
 
     # ////////////////////////////////////////////////////////////
     # Por cada Archivo dentro del directorio, se realiza un ciclo for para recorrer cada linea y verificar hits  
